@@ -20,7 +20,7 @@ const Part = (props) => {
 };
 const Content = (props) => {
   const { parts } = props;
-  console.log(parts[0].exercises);
+  // console.log(parts[0].exercises);
   return (
     <>
       <Part part={parts[0].name} exercises={parts[0].exercises} />
@@ -31,7 +31,7 @@ const Content = (props) => {
 };
 const Total = (props) => {
   const { num } = props
-  console.log(props);
+  // console.log(props);
   return (
     <>
       <p>
@@ -58,7 +58,7 @@ const App = () => {
       },
     ],
   };
-  console.log(course.parts[0].name);
+  // console.log(course.parts[0].name);
   return (
     <div>
       <Header name={course.name} />
