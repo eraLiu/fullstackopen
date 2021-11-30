@@ -1,10 +1,10 @@
 import React from 'react'
 
 const Header = (props) => {
-  const { name } = props;
+  const { course } = props;
   return (
     <>
-      <h1>{name}</h1>
+      <h1>{course}</h1>
     </>
   );
 };
@@ -59,7 +59,7 @@ const App = () => {
 
   return (
     <div>
-        <Header name={course} />
+        <Header course={course} />
         <Content parts={parts} />
         <Total num={parts} />
     </div>
