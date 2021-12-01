@@ -9,7 +9,13 @@ const Display = props => {
 
 const Statistics = (props) =>{
   const{good,bad,neutral} = props
-
+  if (good+neutral+bad === 0) {
+    return (
+      <div>
+        No feedback given
+      </div>
+    )
+  }
   return (
     <>
           <Display text='good' value={good}/>
