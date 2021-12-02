@@ -27,13 +27,27 @@ const App = () => {
       vote[selected] += 1
       setVotes(vote)
   }
+  const mostVotes = () => {
+    let max = 0
+    let indexMax = 0
+    votes.forEach((item, index) => {
+      if (item > max) {
+        max = item
+        indexMax = index
+      }
+    })
+    return indexMax
+  }
   return (
     <div>
-      {anecdotes[selected]}
-      <br/>
+      <h1>Anecdote of the day</h1>
+      <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <Button handleClick={handVoteClick} text='vote'/>
       <Button handleClick={handRandomClick} text='next anecdotes'/>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[mostVotes()]}</p>
+      <p>Has {votes[mostVotes()]} votes</p>
     </div>
   )
 }
