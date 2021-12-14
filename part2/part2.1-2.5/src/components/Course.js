@@ -22,31 +22,39 @@ const Part = (props) => {
 const Content = (props) => {
   const { parts } = props;
   return (
-    <>
-      <Part part={parts[0].name} exercises={parts[0].exercises} />
-      <Part part={parts[1].name} exercises={parts[1].exercises} />
-      <Part part={parts[2].name} exercises={parts[2].exercises} />
-    </>
+    // <>
+    //   <Part part={parts[0].name} exercises={parts[0].exercises} />
+    //   <Part part={parts[1].name} exercises={parts[1].exercises} />
+    //   <Part part={parts[2].name} exercises={parts[2].exercises} />
+    // </>
+        <>
+          {parts.map(part => 
+            <Part key={part.id} part={part.name} exercises={part.exercises}/>
+          )}
+        </>
   );
 };
 const Total = (props) => {
-  const { num } = props
+  const { nums } = props
   // console.log(num)
+  let sumArr = nums.map(num => num.exercises)
+  // console.log(sumArr)
   return (
     <>
       <p>
-        Number of exercises {num[0].exercises+num[1].exercises+num[2].exercises}
+        <strong>total of {sumArr.reduce(function(a, b){return a + b})}  exercises</strong>
       </p>
     </>
   );
 };
+// num[0].exercises+num[1].exercises+num[2].exercises
 const Course = (props) =>{
   const { course } = props
     return (
     <div>
         <Header course={course.name} />
         <Content parts={course.parts} />
-        <Total num={course.parts} />
+        <Total nums={course.parts} />
     </div>
   )
 }
