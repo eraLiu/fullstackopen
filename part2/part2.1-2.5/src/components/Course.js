@@ -42,7 +42,7 @@ const Total = (props) => {
   return (
     <>
       <p>
-        <strong>total of {sumArr.reduce(function(a, b){return a + b})}  exercises</strong>
+        <strong>total of {sumArr.reduce((a,b)=>a+b)}  exercises</strong>
       </p>
     </>
   );
