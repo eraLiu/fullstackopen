@@ -2,16 +2,18 @@ import React, { useState } from 'react'
 import Person from './components/Person'
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas',
+    { name: 'Arto Hellas', number: '040-1234567' ,
     id: 1}
   ]) 
   const [newName, setNewName] = useState('')
+  const [newNumber, setNewNumber] = useState('')
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
       name: newName,
       date: new Date().toISOString(),
       id: persons.length + 1,
+      number:newNumber
 
     }
     persons.some((p) => p.name === newName) ?
@@ -19,10 +21,15 @@ const App = () => {
       :setPersons(persons.concat(personObject))
     
     setNewName('')
+    setNewNumber('')
   }
-  const handlePersonChange = (event) => {
-    console.log(event.target.value)
+  const handleNameChange = (event) => {
+    // console.log(event.target.value)
     setNewName(event.target.value)
+  }
+  const handleNumberChange = (event) => {
+    console.log(event.target.value)
+    setNewNumber(event.target.value)
   }
 
   return (
@@ -32,7 +39,13 @@ const App = () => {
         <div>
           name: <input 
                   value={newName}
-                  onChange={handlePersonChange}
+                  onChange={handleNameChange}
+          />
+        </div>
+        <div>
+          number: <input 
+                  value={newNumber}
+                  onChange={handleNumberChange}
           />
         </div>
         <div>

@@ -4,7 +4,7 @@ const Person = ({ person }) => {
   console.log(person.id)
   return (
     
-    <li>{person.name}</li>
+    <li>{person.name} {person.number}</li>
   )
 }
 
