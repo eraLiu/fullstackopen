@@ -27,11 +27,20 @@ const App = () => {
     )
   }
   const showCountries = () => {
-    if (filterCountry.length === 0) return;
-    if (filterCountry.length === 1) {
+
+    if(filterCountry.length>10){
+      return <p>Too many matches, specify another filter</p>
+    }
+    
+    else if((filterCountry.length>=2 && filterCountry.length<=10 || filterCountry.length ===0)){
+      console.log(filterCountry);
+      return filterCountry.map((country,i) => <p key={i}>{country.name.common}<button onClick={()=>setFilterCountry([filterCountry[i]])}>Show</button></p> );
+    }
+    else {
+      console.log(filterCountry);
       return <Country data={filterCountry[0]} />;
     }
-    return filterCountry.map((country,i) => <p key={i}>{country.name.common}</p>);
+    
   };
   
 
@@ -45,9 +54,7 @@ const App = () => {
       </div>
 
       <div> 
-        {filterCountry.length > 10 ? (
-          <p>Too many matches, specify another filter</p>
-        ) : (
+        {country.length ===0 ?  '': (
           showCountries()
         )}
       </div>

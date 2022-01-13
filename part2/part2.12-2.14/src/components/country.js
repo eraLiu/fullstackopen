@@ -1,12 +1,7 @@
 import React from 'react'
 
 const Country = ({ data:{name, capital, population, flags, languages} }) => {
-  // const language = (Object.entries(languages).map(([key, value]) =>{
-      
-  //     console.log(value);
-  //       <li key = {key}>{value}</li>
-      
-  // }))
+
   return (
     <>
       <h1>{name.common}</h1>
