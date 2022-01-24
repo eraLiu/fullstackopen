@@ -37,6 +37,7 @@ const App = () => {
     })
 
   }
+
   const handleNameChange = (event) => {
     // console.log(event.target.value)
     setNewName(event.target.value)
@@ -49,6 +50,7 @@ const App = () => {
     console.log(event.target.value)
     setFilterName(event.target.value)
   }
+
   
 
   return (
@@ -74,7 +76,7 @@ const App = () => {
       <div> 
       <h2>Numbers</h2>
       <ul>
-        <Persons persons={persons} filtername={filterName} />
+        <Persons persons={persons} filtername={filterName} setPersons={setPersons}/>
         
       </ul>
       </div>
