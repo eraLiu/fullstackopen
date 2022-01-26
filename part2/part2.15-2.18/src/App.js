@@ -3,11 +3,15 @@ import Persons from './components/Persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import personService from './services/person'
+import './index.css'
+import Notification from './components/Notification'
+
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [filterName, setFilterName] = useState('')
+  const [Message, setMessage] = useState('')
   useEffect(() => {
     personService
       .getAll()
@@ -20,7 +24,7 @@ const App = () => {
     const personObject = {
       name: newName,
       date: new Date().toISOString(),
-      id: persons.length + 1,
+      id: persons.length+Math.round(10*Math.random()*persons.lengt),
       number:newNumber
 
     }
@@ -37,12 +41,14 @@ const App = () => {
           .then(returnedPerson => {
             setPersons(persons.map(person =>
               person.id === returnedPerson.id ? returnedPerson : person))
+              setMessage(
+                `Edited ${returnedPerson.name}`
+              )
+              setTimeout(() => {
+                setMessage(null)
+              }, 5000)
+        
 
-              alert(`Edited ${returnedPerson.name}`)
-
-          })
-          .catch(error => {
-            alert(error.response.data.error)
 
           })
         setNewName('')
@@ -50,13 +56,20 @@ const App = () => {
       }
     } else {
     persons.some((p) => p.name === newName) ?
-      alert(`${newName} is already added to phonebook`)
+      setMessage(`[ERROR] ${newName} is already added to phonebook`)
       :setPersons(persons.concat(personObject))
   
       personService
       .create(personObject)
-        .then(returnedNote => {
-      setPersons(persons.concat(returnedNote))
+        .then(returnedPerson => {
+      setPersons(persons.concat(returnedPerson))
+      setMessage(
+        `${returnedPerson.name} is added to phonebook successfully`
+      )
+      setTimeout(() => {
+        setMessage(null)
+      }, 5000)
+      
       setNewName('')
       setNewNumber('')
     })
@@ -83,6 +96,7 @@ const App = () => {
     <div>
       <div>
       <h2>Phonebook</h2>
+      <Notification message={Message} />
         <Filter 
         title='filter shown with filtername:'
         name={filterName}  
@@ -102,7 +116,7 @@ const App = () => {
       <div> 
       <h2>Numbers</h2>
       <ul>
-        <Persons persons={persons} filtername={filterName} setPersons={setPersons}/>
+        <Persons persons={persons} filtername={filterName} setPersons={setPersons} setMessage={setMessage}/>
         
       </ul>
       </div>
