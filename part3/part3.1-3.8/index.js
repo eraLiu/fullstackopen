@@ -1,7 +1,18 @@
-const { request, response } = require('express')
-const express = require('express')
+const express = require("express");
 const app = express()
+const morgan = require("morgan");
 app.use(express.json())
+// Configure morgan to log body of POST request
+morgan.token("person", (req, res) => {
+  if (req.method === "POST") return JSON.stringify(req.body);
+  return null;
+});
+app.use(
+  morgan(
+    ":method :url :status :res[content-length] - :response-time ms :person"
+  )
+);
+
 let persons =
 [
     { 
